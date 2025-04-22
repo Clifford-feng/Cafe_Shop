@@ -1,0 +1,17 @@
+//tsconfig.node.json：
+//专门用于 Vite 配置文件的 TypeScript 配置
+//使用不同的模块解析策略
+//只包含 vite.config.ts 文件
+
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "vite.config.ts"
+  ]
+}

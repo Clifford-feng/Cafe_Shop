@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单 | CaféBliss</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: #000;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .active-menu {
+            color: #ef4444;
+            border-left: 3px solid #ef4444;
+            background-color: rgba(239, 68, 68, 0.05);
+        }
+        
+        .active-tab {
+            color: #ef4444;
+            border-bottom: 2px solid #ef4444;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <div class="mx-auto max-w-[1440px] min-h-screen bg-white shadow-lg flex flex-col overflow-hidden">
+        <!-- 导航栏 -->
+        <nav class="bg-white py-4 px-8 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-coffee text-red-500 text-2xl"></i>
+                <span class="text-xl font-bold">CaféBliss</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="text-black hover:text-red-500 transition">首页</a>
+                <a href="#" class="text-black hover:text-red-500 transition">咖啡系列</a>
+                <a href="#" class="text-black hover:text-red-500 transition">精选周边</a>
+                <a href="#" class="text-black hover:text-red-500 transition">关于我们</a>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <a href="#" class="text-black hover:text-red-500 transition">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="#" class="text-red-500 transition">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="#" class="text-black hover:text-red-500 transition relative">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+                <button class="md:hidden text-black">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- 主体内容 -->
+        <main class="flex-1 py-8 px-4 md:px-8 lg:px-12">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-2xl font-bold mb-8">我的订单</h1>
+                
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- 左侧菜单 -->
+                    <div class="md:w-1/4">
+                        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                            <div class="flex flex-col items-center mb-6">
+                                <div class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden mb-4">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1224&q=80" alt="用户头像" class="w-full h-full object-cover">
+                                </div>
+                                <h2 class="font-bold text-lg">张明</h2>
+                                <p class="text-gray-500 text-sm">zhangming@example.com</p>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <ul class="space-y-1">
+                                    <li class="py-2 px-3 rounded hover:bg-gray-50">
+                                        <a href="#" class="block text-gray-700 hover:text-red-500">
+                                            <i class="fas fa-user-circle mr-2"></i> 个人信息
+                                        </a>
+                                    </li>
+                                    <li class="py-2 px-3 rounded active-menu">
+                                        <a href="#" class="block">
+                                            <i class="fas fa-shopping-basket mr-2"></i> 我的订单
+                                        </a>
+                                    </li>
+                                    <li class="py-2 px-3 rounded hover:bg-gray-50">
+                                        <a href="#" class="block text-gray-700 hover:text-red-500">
+                                            <i class="fas fa-shopping-cart mr-2"></i> 购物车
+                                            <span class="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">3</span>
+                                        </a>
+                                    </li>
+                                    <li class="py-2 px-3 rounded hover:bg-gray-50">
+                                        <a href="#" class="block text-gray-700 hover:text-red-500">
+                                            <i class="fas fa-heart mr-2"></i> 收藏夹
+                                            <span class="bg-gray-200 text-gray-700 text-xs rounded-full px-2 py-0.5 ml-2">5</span>
+                                        </a>
+                                    </li>
+                                    <li class="py-2 px-3 rounded hover:bg-gray-50">
+                                        <a href="#" class="block text-gray-700 hover:text-red-500">
+                                            <i class="fas fa-map-marker-alt mr-2"></i> 收货地址
+                                        </a>
+                                    </li>
+                                    <li class="py-2 px-3 rounded hover:bg-gray-50">
+                                        <a href="#" class="block text-gray-700 hover:text-red-500">
+                                            <i class="fas fa-credit-card mr-2"></i> 支付方式
+                                        </a>
+                                    </li>
+                                    <li class="py-2 px-3 rounded hover:bg-gray-50">
+                                        <a href="#" class="block text-gray-700 hover:text-red-500">
+                                            <i class="fas fa-cog mr-2"></i> 账户设置
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="font-bold mb-4">需要帮助？</h3>
+                            <p class="text-sm text-gray-600 mb-4">如有关于订单的任何问题，请联系我们的客服团队。</p>
+                            <button class="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition">
+                                联系客服
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧内容 -->
+                    <div class="md:w-3/4">
+                        <!-- 订单筛选标签 -->
+                        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                            <div class="border-b mb-6">
+                                <ul class="flex flex-wrap -mb-px">
+                                    <li class="mr-6">
+                                        <a href="#" class="inline-block py-3 px-1 border-b-2 border-red-500 active-tab font-medium">
+                                            所有订单
+                                        </a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a href="#" class="inline-block py-3 px-1 border-b-2 border-transparent text-gray-500 hover:text-red-500 hover:border-red-300">
+                                            待付款
+                                        </a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a href="#" class="inline-block py-3 px-1 border-b-2 border-transparent text-gray-500 hover:text-red-500 hover:border-red-300">
+                                            待发货
+                                        </a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a href="#" class="inline-block py-3 px-1 border-b-2 border-transparent text-gray-500 hover:text-red-500 hover:border-red-300">
+                                            已发货
+                                        </a>
+                                    </li>
+                                    <li class="mr-6">
+                                        <a href="#" class="inline-block py-3 px-1 border-b-2 border-transparent text-gray-500 hover:text-red-500 hover:border-red-300">
+                                            已收货
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- 搜索栏 -->
+                            <div class="flex mb-6">
+                                <div class="relative flex-1">
+                                    <input type="text" placeholder="搜索订单号或商品名称" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                    <button class="absolute right-3 top-2.5 text-gray-400 hover:text-red-500">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div class="ml-4">
+                                    <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white">
+                                        <option>最近三个月</option>
+                                        <option>今年内</option>
+                                        <option>2022年</option>
+                                        <option>2021年</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- 订单列表 -->
+                            <div class="space-y-6">
+                                <!-- 待付款订单 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                        <div class="flex items-center space-x-4">
+                                            <span class="text-gray-600">订单号：CBD2023120105</span>
+                                            <span class="text-gray-600">2023-12-01</span>
+                                        </div>
+                                        <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">待付款</span>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-4 mb-6">
+                                            <div class="w-16 h-16 flex-shrink-0">
+                                                <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&q=80" class="w-full h-full object-cover rounded">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h3 class="font-medium">埃塞俄比亚耶加雪菲咖啡豆</h3>
+                                                <p class="text-gray-600 text-sm">精品咖啡豆 / 250g</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-medium">¥128.00</div>
+                                                <div class="text-gray-500 text-sm">x1</div>
+                                            </div>
+                                        </div>
+                                        <div class="border-t pt-4 flex justify-between items-center">
+                                            <div class="text-gray-600">
+                                                共1件商品 合计: <span class="text-red-500 font-medium">¥128.00</span>（含运费¥10.00）
+                                            </div>
+                                            <div class="space-x-2">
+                                                <button class="px-4 py-1.5 border border-gray-300 rounded-lg hover:border-gray-400 text-sm">取消订单</button>
+                                                <button class="px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm">立即付款</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 待发货订单 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                        <div class="flex items-center space-x-4">
+                                            <span class="text-gray-600">订单号：CBD2023112802</span>
+                                            <span class="text-gray-600">2023-11-28</span>
+                                        </div>
+                                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">待发货</span>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-4 mb-6">
+                                            <div class="w-16 h-16 flex-shrink-0">
+                                                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&q=80" class="w-full h-full object-cover rounded">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h3 class="font-medium">手冲咖啡套装</h3>
+                                                <p class="text-gray-600 text-sm">入门级必备组合</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-medium">¥399.00</div>
+                                                <div class="text-gray-500 text-sm">x1</div>
+                                            </div>
+                                        </div>
+                                        <div class="border-t pt-4 flex justify-between items-center">
+                                            <div class="text-gray-600">
+                                                共1件商品 合计: <span class="text-red-500 font-medium">¥399.00</span>（含运费¥0.00）
+                                            </div>
+                                            <div class="space-x-2">
+                                                <button class="px-4 py-1.5 border border-gray-300 rounded-lg hover:border-gray-400 text-sm">查看详情</button>
+                                                <button class="px-4 py-1.5 border border-gray-300 rounded-lg hover:border-gray-400 text-sm">提醒发货</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 已发货订单 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                        <div class="flex items-center space-x-4">
+                                            <span class="text-gray-600">订单号：CBD2023111501</span>
+                                            <span class="text-gray-600">2023-11-15</span>
+                                        </div>
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">已发货</span>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-4 mb-6">
+                                            <div class="w-16 h-16 flex-shrink-0">
+                                                <img src="https://images.unsplash.com/photo-1610632380989-680fe40816c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&q=80" class="w-full h-full object-cover rounded">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h3 class="font-medium">冷萃咖啡瓶</h3>
+                                                <p class="text-gray-600 text-sm">便携式冷萃咖啡制作</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-medium">¥159.00</div>
+                                                <div class="text-gray-500 text-sm">x1</div>
+                                            </div>
+                                        </div>
+                                        <div class="border-t pt-4 flex justify-between items-center">
+                                            <div class="text-gray-600">
+                                                共1件商品 合计: <span class="text-red-500 font-medium">¥159.00</span>（含运费¥10.00）
+                                            </div>
+                                            <div class="space-x-2">
+                                                <button class="px-4 py-1.5 border border-gray-300 rounded-lg hover:border-gray-400 text-sm">查看物流</button>
+                                                <button class="px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm">确认收货</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 已收货订单 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                        <div class="flex items-center space-x-4">
+                                            <span class="text-gray-600">订单号：CBD2023110103</span>
+                                            <span class="text-gray-600">2023-11-01</span>
+                                        </div>
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">已收货</span>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-4 mb-6">
+                                            <div class="w-16 h-16 flex-shrink-0">
+                                                <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&q=80" class="w-full h-full object-cover rounded">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h3 class="font-medium">哥伦比亚咖啡豆</h3>
+                                                <p class="text-gray-600 text-sm">平衡醇厚，焦糖甜感 / 250g</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-medium">¥118.00</div>
+                                                <div class="text-gray-500 text-sm">x1</div>
+                                            </div>
+                                        </div>
+                                        <div class="border-t pt-4 flex justify-between items-center">
+                                            <div class="text-gray-600">
+                                                共1件商品 合计: <span class="text-red-500 font-medium">¥118.00</span>（含运费¥10.00）
+                                            </div>
+                                            <div class="space-x-2">
+                                                <button class="px-4 py-1.5 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 text-sm">评价商品</button>
+                                                <button class="px-4 py-1.5 border border-gray-300 rounded-lg hover:border-gray-400 text-sm">再次购买</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 分页 -->
+                                <div class="flex justify-center pt-4">
+                                    <nav class="flex items-center space-x-1">
+                                        <a href="#" class="px-3 py-1 rounded border hover:bg-gray-50 text-gray-500">
+                                            <i class="fas fa-chevron-left text-xs"></i>
+                                        </a>
+                                        <a href="#" class="px-3 py-1 rounded border bg-red-500 text-white">1</a>
+                                        <a href="#" class="px-3 py-1 rounded border hover:bg-gray-50 text-gray-700">2</a>
+                                        <a href="#" class="px-3 py-1 rounded border hover:bg-gray-50 text-gray-700">3</a>
+                                        <span class="px-3 py-1 text-gray-500">...</span>
+                                        <a href="#" class="px-3 py-1 rounded border hover:bg-gray-50 text-gray-700">10</a>
+                                        <a href="#" class="px-3 py-1 rounded border hover:bg-gray-50 text-gray-500">
+                                            <i class="fas fa-chevron-right text-xs"></i>
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="bg-white py-12 px-8 md:px-16 border-t">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-coffee text-red-500 text-2xl"></i>
+                        <span class="text-xl font-bold">CaféBliss</span>
+                    </div>
+                    <p class="text-sm mb-4">我们致力于为您提供最高品质的咖啡体验，从世界各地精选的咖啡豆到专业的咖啡器具。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-black hover:text-red-500 transition">
+                            <i class="fab fa-weixin text-lg"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-red-500 transition">
+                            <i class="fab fa-weibo text-lg"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-red-500 transition">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4">产品系列</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-red-500 transition">咖啡豆</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">手冲器具</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">咖啡机</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">礼品套装</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4">关于我们</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-red-500 transition">品牌故事</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">咖啡文化</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">线下门店</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">加入我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4">客户服务</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-red-500 transition">配送说明</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">退换政策</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">常见问题</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t text-center text-sm">
+                <p>&copy; 2023 CaféBliss 咖啡商城. 保留所有权利.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html> 
