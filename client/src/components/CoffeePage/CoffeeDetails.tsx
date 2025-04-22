@@ -133,3 +133,4 @@ const CoffeeDetails = () => {
 };
 
 export default CoffeeDetails;
+// Coffee Details Component - A component for displaying coffee product details
