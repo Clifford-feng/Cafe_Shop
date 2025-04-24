@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import BackButton from '../common/BackButton';
 
 // 咖啡数据接口
 interface Coffee {
@@ -7,17 +9,13 @@ interface Coffee {
   image_url: string;
 }
 
-// 组件属性接口
-interface CoffeeListProps {
-  onCoffeeSelect: (coffeeId: number) => void;
-}
-
 // 咖啡列表组件
-const CoffeeList: React.FC<CoffeeListProps> = ({ onCoffeeSelect }) => {
+const CoffeeList: React.FC = () => {
   // 状态管理
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   // 获取咖啡数据
   useEffect(() => {
@@ -42,9 +40,13 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ onCoffeeSelect }) => {
     fetchCoffees();
   }, []);
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   // 处理咖啡点击事件
   const handleCoffeeClick = (coffee: Coffee) => {
-    onCoffeeSelect(coffee.id);
+    navigate(`/coffee/${coffee.id}`);
   };
 
   // 加载状态显示
@@ -56,6 +58,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ onCoffeeSelect }) => {
   // 渲染咖啡列表
   return (
     <div className="p-4">
+       <BackButton onClick={handleBack} text="返回" className="mb-6" />
       <h2 className="text-2xl font-bold mb-4">Our Coffee Selection</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
