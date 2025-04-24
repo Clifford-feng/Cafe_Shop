@@ -1,19 +1,45 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiSearch, FiUser, FiShoppingBag } from 'react-icons/fi';
 
 const Header: React.FC = () => {
   return (
     <nav className="w-full bg-white py-4 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center space-x-2">
-            <span className="text-xl font-bold">CaféBliss</span>
+            <i className="fas fa-coffee text-red-500 text-2xl"></i>
+            <Link to="/" className="text-xl font-bold">CaféBliss</Link>
           </div>
 
-          <div className="flex items-center space-x-8">
-            <a href="#" className="text-gray-700 hover:text-red-500 transition">首页</a>
-            <a href="#" className="text-gray-700 hover:text-red-500 transition">咖啡系列</a>
-            <a href="#" className="text-gray-700 hover:text-red-500 transition">周边产品</a>
-            <a href="#" className="text-gray-700 hover:text-red-500 transition">关于我们</a>
+          {/* Navigation Links */}
+          <div className="flex-1 flex items-center justify-center space-x-8 mx-8">
+            <Link to="/" className="text-gray-900 hover:text-red-500 transition font-medium">首页</Link>
+            <Link to="/coffee" className="text-gray-900 hover:text-red-500 transition font-medium">咖啡系列</Link>
+            <Link to="/products" className="text-gray-900 hover:text-red-500 transition font-medium">精选周边</Link>
+            <Link to="/about" className="text-gray-900 hover:text-red-500 transition font-medium">关于我们</Link>
+          </div>
+
+          {/* Right Icons */}
+          <div className="flex items-center space-x-6">
+            {/* Search Icon */}
+            <button className="text-gray-700 hover:text-red-500 transition">
+              <FiSearch className="h-6 w-6" />
+            </button>
+
+            {/* User Icon */}
+            <button className="text-gray-700 hover:text-red-500 transition">
+              <FiUser className="h-6 w-6" />
+            </button>
+
+            {/* Shopping Bag Icon */}
+            <button className="text-gray-700 hover:text-red-500 transition relative">
+              <FiShoppingBag className="h-6 w-6" />
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                0
+              </span>
+            </button>
           </div>
         </div>
       </div>

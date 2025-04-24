@@ -112,11 +112,17 @@ app.get('/api/products/name/:id', async (req: Request, res: Response) => {
   }
 });
 
+
+
 app.get('/api/products/is_hot', async (req: Request, res: Response) => {
   try {
     const hotProducts = await db.select({
       id: products.id,
-      product_name: products.product_name
+      product_name: products.product_name,
+      description: products.description,
+      original_price: products.original_price,
+      discount_price: products.discounted_price,
+      image_url: products.image_url,
     }).from(products).where(eq(products.is_hot, true));
     res.json(hotProducts);
   } catch (error) {

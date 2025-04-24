@@ -1,77 +1,74 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import BackButton from '../common/BackButton';
 
-// 组件属性接口
+// 咖啡详情接口
 interface CoffeeDetailsProps {
-  coffeeId: number;
-  onBack: () => void;
-}
-
-// 咖啡详情数据接口
-interface CoffeeDetails {
+  id: number;
   product_name: string;
-  image_url: string;
   price: number;
-  size: string | null;
   description: string;
   origin: string;
   roasting_level: string;
-  material: string | null;
-  specifications: string | null;
-  brand: string | null;
+  image_url: string;
+  size?: string | null;
+  material?: string | null;
+  specifications?: string | null;
+  brand?: string | null;
 }
 
-// 咖啡详情组件
-const CoffeeDetails: React.FC<CoffeeDetailsProps> = ({ coffeeId, onBack }) => {
-  // 状态管理
-  const [coffeeDetails, setCoffeeDetails] = useState<CoffeeDetails | null>(null);
+const CoffeeDetails: React.FC = () => {
+  const [coffeeDetails, setCoffeeDetails] = useState<CoffeeDetailsProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  // 获取咖啡详情数据
   useEffect(() => {
     const fetchCoffeeDetails = async () => {
       try {
-        // 获取特定咖啡的详细信息
-        const response = await fetch(`http://localhost:3001/api/products/name/${coffeeId}`);
-
+        setLoading(true);
+        // 使用完整的URL地址
+        const response = await fetch(`http://localhost:3001/api/products/name/${id}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch coffee details');
+          throw new Error(`Failed to fetch coffee details: ${response.status}`);
         }
-
         const data = await response.json();
+        console.log('获取到的咖啡详情数据:', data);
         setCoffeeDetails(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+        console.error('Error fetching coffee details:', err);
+        setError('Failed to load coffee details. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCoffeeDetails();
-  }, [coffeeId]);
+    if (id) {
+      fetchCoffeeDetails();
+    }
+  }, [id]);
 
-  // 加载状态显示
-  if (loading) return <div className="text-center py-4">Loading...</div>;
+  const handleBack = () => {
+    navigate('/coffee');
+  };
 
-  // 错误状态显示
-  if (error) return <div className="text-center py-4 text-red-500">Error: {error}</div>;
+  if (loading) {
+    return <div className="text-center p-10">Loading coffee details...</div>;
+  }
 
-  // 无数据状态显示
-  if (!coffeeDetails) return <div className="text-center py-4">No coffee details found</div>;
+  if (error) {
+    return <div className="text-center p-10 text-red-500">{error}</div>;
+  }
 
-  // 渲染咖啡详情页面
+  if (!coffeeDetails) {
+    return <div className="text-center p-10">No coffee details found.</div>;
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* 返回按钮 */}
-      <button
-        onClick={onBack}
-        className="mb-6 text-gray-600 hover:text-gray-900 flex items-center"
-      >
-        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        返回
-      </button>
+      <BackButton onClick={handleBack} text="返回" className="mb-6" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* 左侧：主图区域 */}
@@ -147,4 +144,3 @@ const CoffeeDetails: React.FC<CoffeeDetailsProps> = ({ coffeeId, onBack }) => {
 };
 
 export default CoffeeDetails;
-// Coffee Details Component - A component for displaying coffee product details
